@@ -24,7 +24,6 @@ defmodule TestWeb do
       import Plug.Conn
       import TestWeb.Gettext
       alias TestWeb.Router.Helpers, as: Routes
-      import Phoenix.LiveView.Controller
     end
   end
 
@@ -40,7 +39,23 @@ defmodule TestWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
-      import Phoenix.LiveView.Helpers
+    end
+  end
+
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {TestWeb.LayoutView, "live.html"}
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      unquote(view_helpers())
     end
   end
 
@@ -65,6 +80,9 @@ defmodule TestWeb do
     quote do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+
+      # Import LiveView helpers (live_render, live_component, live_patch, etc)
+      import Phoenix.LiveView.Helpers
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View

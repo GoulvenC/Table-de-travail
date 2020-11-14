@@ -7,7 +7,7 @@ defmodule TestWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_test_key",
-    signing_salt: "d8uIY4bd"
+    signing_salt: "8azDy+k7"
   ]
 
   socket "/socket", TestWeb.UserSocket,

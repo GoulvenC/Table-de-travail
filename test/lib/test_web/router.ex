@@ -5,6 +5,7 @@ defmodule TestWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
+    plug :put_root_layout, {TestWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -16,7 +17,7 @@ defmodule TestWeb.Router do
   scope "/", TestWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive, :index
     live "/counter", CounterLive
   end
 
